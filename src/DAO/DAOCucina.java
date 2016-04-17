@@ -9,26 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Cucina;
+import varie.ConnectionManager;
 
 public class DAOCucina {
 	
 	private Connection conn;
-	private String url = "jdbc:sqlserver://localhost;databaseName=BLOG";
-	private String user = "alerossi82";
-	private String password = "telecono";
 	private String select = "SELECT * FROM [BLOG].[dbo].[Cucina] ORDER BY Nome";
 	
-	public DAOCucina() throws SQLException{
-		try {
-			// connette il jdbc
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			// creo connessione al DB Blog
-			conn = DriverManager.getConnection(url, user, password);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("non si connette al DB");
-			e.printStackTrace();
-		}
+	public DAOCucina() {
+		conn=ConnectionManager.getConnection();
 	}
 	
 	//create an object for each line in the Cucina table and adds it to a list

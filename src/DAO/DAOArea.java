@@ -8,27 +8,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import beans.Area;
+import varie.ConnectionManager;
 
 public class DAOArea {
 	
 	private Connection conn;
-	private String url = "jdbc:sqlserver://localhost;databaseName=BLOG";
-	private String user = "alerossi82";
-	private String password = "telecono";
+
 	//SQL query to retrive all data from table Area
 	private String select = "SELECT * FROM [BLOG].[dbo].[Area] ORDER BY ID";
 	
 	//create connection in the constructor
-	public DAOArea() throws SQLException{
-		try {
-			// connette il jdbc
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn = DriverManager.getConnection(url, user, password);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("non si connette al DB");
-			e.printStackTrace();
-		}
+	public DAOArea() {
+		conn=ConnectionManager.getConnection();
 	}
 
 	

@@ -9,28 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.User;
+import varie.ConnectionManager;
 
 public class DAOUser {
 
 	private Connection conn;
-	private String url = "jdbc:sqlserver://localhost;databaseName=BLOG";
-	private String DBuser = "alerossi82";
-	private String DBpassword = "telecono";
+	
 	private String selectUser = "Select * FROM [dbo].[User] WHERE Email=?";
 	private String insertUser = "INSERT INTO [dbo].[User] (Email, Password) VALUES (?, ?)";
 	private String selectAllUsers = "Select Email FROM [dbo].[User]";
 
 	// create connection in the constructor
-	public DAOUser() throws SQLException {
-		try {
-			// connette il jdbc
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn = DriverManager.getConnection(url, DBuser, DBpassword);
-			System.out.println("connessione al DB effettuata");
-		} catch (ClassNotFoundException e) {
-			System.out.println("non si connette al DB");
-			e.printStackTrace();
-		}
+	public DAOUser() {
+		conn=ConnectionManager.getConnection();
 	}
 
 	// return all emails from table User

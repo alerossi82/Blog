@@ -10,13 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import beans.Articolo;
 import beans.ArticoloRM;
+import varie.ConnectionManager;
 
 public class DAOArticolo {
 
 	private Connection conn;
-	private String url = "jdbc:sqlserver://localhost;databaseName=BLOG";
-	private String user = "alerossi82";
-	private String password = "telecono";
 
 	// SQL query to SELECT all data from a single row in table Articoli
 	private String select = "SELECT * FROM dbo.Articolo WHERE ID=?";
@@ -29,18 +27,8 @@ public class DAOArticolo {
 	//SQL query to DELETE a row in table Articoli
 	private String delete="DELETE FROM [dbo].[Articolo] WHERE ID=?";
 	
-	//create connection to DB in the constructor
-	public DAOArticolo() throws SQLException{
-		try {
-			// jdbc
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn = DriverManager.getConnection(url, user, password);
-			System.out.println("connected to DB");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("non si connette al DB");
-			e.printStackTrace();
-		}
+	public DAOArticolo(){
+		conn=ConnectionManager.getConnection();
 	}
 
 	// this method returns a new Article for a given ID using the SELECT query
@@ -135,14 +123,3 @@ public class DAOArticolo {
 	}
 
 }
-
-/*
- * 1. crrea u9n cosruttre di calsse e sposai la logica di creazione della
- * connessione. Usa una variabile di classe privata persalvarti la connessione.
- * crea nuovi bean: Area, Cucina, Voto, NewEditArticolo crea nuovi DAO per Area,
- * Cucina e Voto per creare lista di tutte le linee nel DB 
- * 2. creaa unmetodo UPDATE sempre con un Ariticolo in ingressp 
- * 3. ok che hai il get, ma passagli l'ID 
- * 4. crea, se vuoi un metodo search, con in ingrsso un po' di parametri ad
- * esempio: searchString, rowsToFetch, areaid. restituira una lista di articoli
- */

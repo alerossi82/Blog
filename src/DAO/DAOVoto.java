@@ -9,28 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Voto;
+import varie.ConnectionManager;
 
 public class DAOVoto {
 
 	private Connection conn;
-	private String url = "jdbc:sqlserver://localhost;databaseName=BLOG";
-	private String user = "alerossi82";
-	private String password = "telecono";
 	private String select = "SELECT * FROM [BLOG].[dbo].[Voto] ORDER BY Nome";
 	
-	
-	
-	public DAOVoto() throws SQLException {
-		try {
-			// connette il jdbc
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			// creo connessione al DB Blog
-			conn = DriverManager.getConnection(url, user, password);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("non si connette al DB");
-			e.printStackTrace();
-		}
+	//constructor
+	public DAOVoto() {
+		conn=ConnectionManager.getConnection();
 	}
 	
 	//generates a list containing an object for each line in the Voto table

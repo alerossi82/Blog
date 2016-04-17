@@ -101,12 +101,7 @@ public class ControllerArticleManager extends HttpServlet {
 
 		// create DAO to send data to DB
 		DAOArticolo DAO = null;
-		try {
-			DAO = new DAOArticolo();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		DAO = new DAOArticolo();
 
 		// INSERT new article in DB
 		if (submit.equals("SUBMIT")) {

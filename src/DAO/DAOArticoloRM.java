@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import beans.Articolo;
 import beans.ArticoloRM;
+import varie.ConnectionManager;
 
 public class DAOArticoloRM {
+	
 	//variables for connection
 	private Connection conn;
-	private String url = "jdbc:sqlserver://localhost;databaseName=BLOG";
-	private String user = "alerossi82";
-	private String password = "telecono";
+	
 	//SQL queries
 	private String getArticolo = "SELECT Articolo.ID, Articolo.Ristorante, Area.Nome AS Area, Cucina.Nome AS Cucina, Prezzo.Nome AS Prezzo, Articolo.Data, Articolo.Articolo, Voto.Nome AS Voto, Articolo.Foto " 
 			 + "FROM [BLOG].[dbo].[Articolo] INNER JOIN [BLOG].[dbo].[Cucina] "
@@ -26,6 +26,7 @@ public class DAOArticoloRM {
 			 + "WHERE Articolo.ID=?";
 	private String selectCount = "SELECT COUNT(*) FROM dbo.Articolo";
 	private String selectIDandRistorante = "SELECT ID,Ristorante FROM [dbo].[Articolo] ORDER BY ID DESC";
+	
 	// take all fields from ? rows in Articoli, skipping previous ? rows
 	// table Articoli is joined with tables Cucina, Area, Prezzo and Voto
 	private String selectWithJoin = "SELECT Articolo.ID, Articolo.Ristorante, Area.Nome AS Area, Cucina.Nome AS Cucina, Prezzo.Nome AS Prezzo, Articolo.Data, Articolo.Articolo, Voto.Nome AS Voto, Articolo.Foto "
@@ -36,17 +37,11 @@ public class DAOArticoloRM {
 			+ "ON Articolo.IDVoto=Voto.ID "
 			+ "ORDER BY Articolo.ID DESC " 
 			+ "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+	
 
 	// connection to DB is set inside the constructor
-	public DAOArticoloRM() throws SQLException {
-		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn = DriverManager.getConnection(url, user, password);
-			System.out.println("connected to DB");
-		} catch (ClassNotFoundException e) {
-			System.out.println("non si connette al DB");
-			e.printStackTrace();
-		}
+	public DAOArticoloRM(){
+		conn=ConnectionManager.getConnection();
 	}
 
 	// return all fields for an article
