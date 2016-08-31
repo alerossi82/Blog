@@ -7,17 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import beans.User;
+import beans.Users;
 import varie.ConnectionManager;
 
 public class DAOUser {
 
 	private Connection conn;
 	
-	private String selectUser = "Select * FROM [dbo].[User] WHERE Email=?";
-	private String insertUser = "INSERT INTO [dbo].[User] (Email, Password) VALUES (?, ?)";
-	private String selectAllUsers = "Select Email FROM [dbo].[User]";
+	private String selectUser = "Select * FROM [dbo].[Users] WHERE Email=?";
+	private String insertUser = "INSERT INTO [dbo].[Users] (Email, Password) VALUES (?, ?)";
+	private String selectAllUsers = "Select Email FROM [dbo].[Users]";
 
 	// create connection in the constructor
 	public DAOUser() {
@@ -25,12 +24,12 @@ public class DAOUser {
 	}
 
 	// return all emails from table User
-	public List<User> selectAllEmails() throws SQLException {
+	public List<Users> selectAllEmails() throws SQLException {
 		PreparedStatement stmt = conn.prepareStatement(selectAllUsers);
 		ResultSet rs = stmt.executeQuery();
-		List<User> listUsers = new ArrayList<User>();
+		List<Users> listUsers = new ArrayList<Users>();
 		while (rs.next()) {
-			User user1 = new User();
+			Users user1 = new Users();
 			user1.setEmail(rs.getString("Email"));
 			listUsers.add(user1);
 		}
@@ -47,9 +46,9 @@ public class DAOUser {
 	}
 
 	// return user details for a given email
-	public User returnUser(String email) throws SQLException {
+	public Users returnUser(String email) throws SQLException {
 		PreparedStatement stmt;
-		User user1 = new User();
+		Users user1 = new Users();
 			stmt = conn.prepareStatement(selectUser);
 			stmt.setString(1, email);
 			ResultSet rs = stmt.executeQuery();

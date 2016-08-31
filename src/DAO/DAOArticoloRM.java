@@ -24,7 +24,9 @@ public class DAOArticoloRM {
 			 + "ON Articolo.IDPrezzo=Prezzo.ID INNER JOIN [BLOG].[dbo].[Voto] " 
 			 + "ON Articolo.IDVoto=Voto.ID "
 			 + "WHERE Articolo.ID=?";
+	
 	private String selectCount = "SELECT COUNT(*) FROM dbo.Articolo";
+	
 	private String selectIDandRistorante = "SELECT ID,Ristorante FROM [dbo].[Articolo] ORDER BY ID DESC";
 	
 	// take all fields from ? rows in Articoli, skipping previous ? rows

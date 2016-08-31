@@ -2,13 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import DAO.DAOArticolo;
 import beans.Articolo;
 import varie.NewEditArticolo;
@@ -25,7 +23,6 @@ public class ControllerArticleManager extends HttpServlet {
 	 */
 	public ControllerArticleManager() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -36,7 +33,7 @@ public class ControllerArticleManager extends HttpServlet {
 	// open an article in view ArticleMananager
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		// get email attribute from session to check login
@@ -53,7 +50,6 @@ public class ControllerArticleManager extends HttpServlet {
 				request.setAttribute("nea", nea);
 				request.getRequestDispatcher("/ArticleManager.jsp").forward(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -69,9 +65,10 @@ public class ControllerArticleManager extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	
+	//create/edit article in DB
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		// get parameters from view ArticleManager.jsp
 		String submit = request.getParameter("submit");
@@ -115,7 +112,7 @@ public class ControllerArticleManager extends HttpServlet {
 					e.printStackTrace();
 				}
 
-				// UPDATE article in DB
+			// UPDATE article in DB
 			} else {
 				try {
 					art.setId(id);

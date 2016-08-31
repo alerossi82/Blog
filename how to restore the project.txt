@@ -17,23 +17,3 @@ RESTORE PROJECT WITH SCRIPTS
 6 - run project
 7 - log in the application with username prova@prova.com pword: letmein
 
-
-
-
-
-
-
-
-- crea static class connection  con attributi url, user, password
-
-	private String url = "jdbc:sqlserver://localhost;databaseName=BLOG";
-	private String user = "alerossi82";
-	private String password = "telecono";
-	
-- crea static method getDBConnection che restituisce un oggetto Connection
-
-public static Connection getDBConnection (){
-Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			Connection conn = DriverManager.getConnection(url, user, password);
-			return conn;
-			}

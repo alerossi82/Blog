@@ -24,18 +24,19 @@ public class ControllerDisplayArticle extends HttpServlet {
      */
     public ControllerDisplayArticle() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		//get param ID from view home.jsp and parse to int
+		
+		//get param ID from view SIDEBAR.TAG and parse to int
 		String id=request.getParameter("ID");
 		int ID=Integer.parseInt(id); 
+		
 		//generate hvm object for the specific article and pass it to viewArticle.jsp
 		try {
 			HomeViewModel hvm=new HomeViewModel();
@@ -54,7 +55,7 @@ public class ControllerDisplayArticle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

@@ -16,6 +16,7 @@ import varie.NewEditArticolo;
 
 /**
  * Servlet implementation class ControllerHome
+ * Create model for HOME.JSP
  */
 @WebServlet("/ControllerHome")
 public class ControllerHome extends HttpServlet {
@@ -35,22 +36,25 @@ public class ControllerHome extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		// create model for HOME.JSP
+		
 		// get parameter page from view home.jsp and parse to int
 		// if first page, set value to 1
 		String param = request.getParameter("page");
 		Integer page = (param == null) ? 1 : Integer.parseInt(param);
+		
 		// get parameter showListOfAllArticles from view home.jsp
 		String showListOfAllArticles = request.getParameter("showListOfAllArticles");
+		
 		// create HomeViewModel for the selected page, and pass it to HOME.JSP
 		try {
 			HomeViewModel hvm = new HomeViewModel();
 			hvm.generateListaAllArticoli();
+			
 			//generate list of articles to display based for the specific page
 			hvm.generateListaArticoliRM(page);
+			
 			// set showListOfAllArticles true if link "more" was clicked in home.jsp
 			if (showListOfAllArticles != null) {
 				hvm.setShowListOfAllArticles(true);
@@ -59,7 +63,6 @@ public class ControllerHome extends HttpServlet {
 			request.getRequestDispatcher("/home.jsp").forward(request, response);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("creazione HomeViewModel fallita");
 			e.printStackTrace();
 		}

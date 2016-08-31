@@ -2,12 +2,11 @@ package varie;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import DAO.DAOUser;
-import beans.User;
+import beans.Users;
 
 public class UserModel {
-	User user1;
+	Users user1;
 	String message;
 	DAOUser dao;
 
@@ -56,8 +55,8 @@ public class UserModel {
 	// the DB
 	public boolean checkEmail(String email) throws SQLException {
 		boolean bool = true;
-		List<User> list = dao.selectAllEmails();
-		for (User u : list) {
+		List<Users> list = dao.selectAllEmails();
+		for (Users u : list) {
 			String user = u.getEmail();
 			if (user.equals(email)) {
 				message = "a user with this name already exists";

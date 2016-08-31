@@ -9,8 +9,10 @@
 
 	<form action="/BLOG/ControllerUser" method="post">
 		<h2>LOG-IN</h2>
+		
 		<!-- pass value login to controller when form is submitted -->
 		<input type="hidden" name="action" value="login" />
+		
 		<table>
 			<tr>
 				<td>E-MAIL</td>

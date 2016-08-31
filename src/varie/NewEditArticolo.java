@@ -46,7 +46,7 @@ public class NewEditArticolo {
 
 		ListaImg = new ArrayList<String>();
 		// create array containing the path of all files in folder img
-		File folder = new File("C:/Users/Alessandro/workspace/BLOG/WebContent/img");
+		File folder = new File("C:/Users/Ale/workspace/BLOG/WebContent/img");
 		File[] arrayImg = folder.listFiles();
 		// get the name of each file in the array and add it to ListaImg
 		for (File f : arrayImg) {

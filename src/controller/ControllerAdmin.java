@@ -37,18 +37,20 @@ public class ControllerAdmin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		// get attribute email from session
 		Object email = request.getSession().getAttribute("email");
+		
 		// if logged in, create a list of all ID and Ristorante in the DB
+		
 		if (email != null) {
 			try {
 				DAOArticoloRM dao = new DAOArticoloRM();
 				List<ArticoloRM> listIDRistorante = dao.getAllIDandRistorante();
 				request.setAttribute("listIDRistorante", listIDRistorante);
 				request.getRequestDispatcher("/admin.jsp").forward(request, response);
-				;
+				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

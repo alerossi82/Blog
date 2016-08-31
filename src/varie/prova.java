@@ -17,7 +17,7 @@ import beans.Articolo;
 import beans.ArticoloRM;
 import beans.Cucina;
 import beans.Prezzo;
-import beans.User;
+import beans.Users;
 import beans.Voto;
 
 public class prova {

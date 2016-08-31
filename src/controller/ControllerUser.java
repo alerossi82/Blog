@@ -2,15 +2,13 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import DAO.DAOUser;
-import beans.User;
+import beans.Users;
 import varie.UserModel;
 
 /**
@@ -25,7 +23,6 @@ public class ControllerUser extends HttpServlet {
 	 */
 	public ControllerUser() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -34,7 +31,6 @@ public class ControllerUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		//get param action from masthead.tag
@@ -42,9 +38,10 @@ public class ControllerUser extends HttpServlet {
 		
 		switch (action) {
 			case "logout":
+				
 				// set attribute email=null in session and forward to view login
 				request.getSession().setAttribute("email", null);
-				request.getRequestDispatcher("/home.jsp").forward(request, response);
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
 			}
 
 	}
@@ -56,6 +53,7 @@ public class ControllerUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		//get parameters from LOGIN.JSP
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String action = request.getParameter("action");
@@ -68,25 +66,32 @@ public class ControllerUser extends HttpServlet {
 			switch (action) {
 			
 			case "login":
+				
 				// if login details are valid
 				if (model.login(email, password)) {
+					
 					// set attribute email in session
 					request.getSession().setAttribute("email", email);
+					
 					//forward to servlet ControllerAdmin
 					request.getRequestDispatcher("/ControllerAdmin").forward(request, response);
 				}
-				// if login details are not valid 
+				
+				// if login details are false
 				else {
-					//set attribute message to return validation message 
+					
+					//pass UserModel to view LOGiN.JSP to display failed login message
 					request.setAttribute("model", model);
-					//forward to view login.jsp
 					request.getRequestDispatcher("/login.jsp").forward(request, response);
 				}
 				break;
-
+				
+				
 			case "newAccount":
+				
 				//call method to create new account
 				model.newUser(email, password);
+				
 				// set attribute and forward to view newAccount.jsp
 				request.setAttribute("model", model);
 				request.getRequestDispatcher("/newAccount.jsp").forward(request, response);
@@ -98,7 +103,6 @@ public class ControllerUser extends HttpServlet {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("exception in doGet");
 		}

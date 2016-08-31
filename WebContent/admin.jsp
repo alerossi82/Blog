@@ -17,7 +17,7 @@
 				NEW ARTICLE</h3></a>
 	</p>
 
-	<!-- loop through listIDRistorante (from ControllerSelectArticle) to create a table of all articles in the DB
+	<!-- loop through listIDRistorante (from ControllerAdmin) to create a table of all articles in the DB
 and a link to forward each IDarticolo to ControllerArticleManager.Get -->
 	<table>
 		<c:forEach items="${listIDRistorante}" var="art">

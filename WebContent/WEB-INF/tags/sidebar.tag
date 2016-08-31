@@ -47,7 +47,7 @@
 		<div class="sidebar-module">
 			<h4>Elsewhere</h4>
 			<ol class="list-unstyled">
-				<li><a href="#">GitHub</a></li>
+				<li><a href="https://github.com/alerossi82">GitHub</a></li>
 				<li><a
 					href="https://www.linkedin.com/in/alessandro-rossi-4844374?trk=hp-identity-name">LinkedIn</a></li>
 			</ol>

@@ -12,8 +12,7 @@
 	<c:forEach var="articolo" items="${hvm.listaArticoliRM}">
 		<div class="blog-post">
 			<h2 class="blog-post-title">${articolo.ristorante}</h2>
-			<p class="blog-post-meta">${articolo.data}
-			</p>
+			<p class="blog-post-meta">${articolo.data}</p>
 
 			<p class="voto">
 				RATING:

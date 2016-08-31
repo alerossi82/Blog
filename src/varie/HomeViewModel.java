@@ -2,18 +2,8 @@ package varie;
 
 import java.sql.SQLException;
 import java.util.List;
-import DAO.DAOArea;
-import DAO.DAOArticolo;
 import DAO.DAOArticoloRM;
-import DAO.DAOCucina;
-import DAO.DAOPrezzo;
-import DAO.DAOVoto;
-import beans.Area;
-import beans.Articolo;
 import beans.ArticoloRM;
-import beans.Cucina;
-import beans.Prezzo;
-import beans.Voto;
 
 public class HomeViewModel {
 	
@@ -29,11 +19,15 @@ public class HomeViewModel {
 	private boolean showListOfAllArticles; //if true, displays list of all articles in menu
 	
 	public HomeViewModel() throws SQLException {
+		
 		//articles to display in each page
 		take=2;
+		
 		DAOrm = new DAOArticoloRM();
+		
 		//return tot.number of rows in table Articoli
 		totArticoliinDB=DAOrm.getTotalCount();
+		
 		//returns number of tot.pages for Home page
 		totPages=totArticoliinDB/take;
 	}
@@ -45,6 +39,7 @@ public class HomeViewModel {
 	//generate list of articles to display based on the page
 	public void generateListaArticoliRM(int page) throws SQLException{
 		currentPage = page;
+		
 		//skip articles displayed in previous pages
 		skip = take*(currentPage-1); 
 		ListaArticoliRM = DAOrm.selectWithJoin(skip, take);
@@ -54,7 +49,10 @@ public class HomeViewModel {
 		listaAllArticoli=DAOrm.getAllIDandRistorante();
 	}
 	
-	//accessors
+	
+	
+	
+	//ACCESSORS
 	
 	public List<ArticoloRM> getListaArticoliRM() {
 		return ListaArticoliRM;
