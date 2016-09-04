@@ -28,8 +28,8 @@ public class HomeViewModel {
 		//return tot.number of rows in table Articoli
 		totArticoliinDB=DAOrm.getTotalCount();
 		
-		//returns number of tot.pages for Home page
-		totPages=totArticoliinDB/take;
+		//returns number of tot.pages for Home page, rounding up if result is decimal
+		totPages= (totArticoliinDB + take -1)/take;
 	}
 	
 	public void generateArticolo (int ID) throws SQLException{
