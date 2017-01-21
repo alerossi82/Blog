@@ -13,9 +13,6 @@
 		<div class="blog-post">
 			<h2 class="blog-post-title">${articolo.ristorante}</h2>
 			
-			<!-- DEPRECATED -->
-			<%-- <p class="blog-post-meta">${articolo.data}</p> --%>
-
 			<p class="voto">
 				RATING:
 				<!-- add as many stars as per IDVoto -->
@@ -40,10 +37,6 @@
 				<dt>Price:</dt>
 				<dd>${articolo.prezzo}</dd>
 			</dl>
-			
-			<!-- DEPRECATED -->
-			<%-- <!-- set body of the article -->
-			<p>${articolo.articolo}</p> --%>
 			
 		</div>
 		<!-- /.blog-post -->

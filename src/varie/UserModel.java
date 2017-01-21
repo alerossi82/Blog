@@ -25,14 +25,14 @@ public class UserModel {
 	}
 
 	// validate new User
-	public boolean validate(String email, String password) {
-		if (email == "" || password == "") {
-			message = "email or password not provided";
+	public boolean validate(String username, String password) {
+		if (username == "" || password == "") {
+			message = "username or password not provided";
 			return false;
 		}
 
-		if (!email.matches("\\w+@+\\w+\\.+\\w+") && !email.matches("\\w+\\.+\\w+@+\\w+\\.+\\w+")) {
-			message = "Invalid email address";
+		if (!username.matches("\\w+@+\\w+\\.+\\w+") && !username.matches("\\w+\\.+\\w+@+\\w+\\.+\\w+")) {
+			message = "Invalid username address";
 			return false;
 		}
 
@@ -51,14 +51,14 @@ public class UserModel {
 		}
 	}
 
-	// check that the email from view newAccount.jsp does not exists already in
+	// check that the username from view newAccount.jsp does not exists already in
 	// the DB
-	public boolean checkEmail(String email) throws SQLException {
+	public boolean checkUser(String username) throws SQLException {
 		boolean bool = true;
 		List<Users> list = dao.selectAllEmails();
 		for (Users u : list) {
-			String user = u.getEmail();
-			if (user.equals(email)) {
+			String user = u.getUsername();
+			if (user.equals(username)) {
 				message = "a user with this name already exists";
 				bool = false;
 				break;
@@ -70,33 +70,33 @@ public class UserModel {
 	}
 
 	// insert new user
-	public void insertUser(String email, String password) throws SQLException {
-		dao.insertUser(email, password);
-		message = "new user " + email + " was created";
+	public void insertUser(String username, String password) throws SQLException {
+		dao.insertUser(username, password);
+		message = "new user " + username + " was created";
 	}
 
 	// check new user details and if check is ok, create new user in DB
-	public void newUser(String email, String password) throws SQLException {
-		if (validate(email, password)) {
-			if (checkEmail(email)) {
-				insertUser(email, password);
+	public void newUser(String username, String password) throws SQLException {
+		if (validate(username, password)) {
+			if (checkUser(username)) {
+				insertUser(username, password);
 			}
 		}
 	}
 
 	// check if login details from view login.jsp are valid in DB
-	public boolean login(String email, String password) throws SQLException {
-		user1 = dao.returnUser(email);
-		String emailInDB = user1.getEmail();
+	public boolean login(String username, String password) throws SQLException {
+		user1 = dao.returnUser(username);
+		String emailInDB = user1.getUsername();
 		String passwordInDB = user1.getPassword();
 		if (emailInDB == null) {
-			message = "Invalid email address";
+			message = "Invalid username address";
 			return false;
 		} else if (passwordInDB != null && passwordInDB.equals(password)) {
-			message = "Logged in with user " + email;
+			message = "Logged in with user " + username;
 			return true;
 		} else {
-			message = "invalid password for user " + email;
+			message = "invalid password for user " + username;
 			return false;
 		}
 	}
